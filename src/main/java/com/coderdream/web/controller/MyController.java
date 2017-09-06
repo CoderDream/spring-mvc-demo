@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MyController {
 
 	@RequestMapping("login") // 用来处理前台的login请求
-	private @ResponseBody String hello(@RequestParam(value = "username", required = false) String username,
-			@RequestParam(value = "password", required = false) String password) {
+	public @ResponseBody String hello(
+					@RequestParam(value = "username", required = false) String username,
+					@RequestParam(value = "password", required = false) String password) {
 		return "Hello " + username + ",Your password is: " + password;
 	}
 
