@@ -1,41 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="7" passed="7">
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="9717" started-at="2017-09-06T05:59:14Z" finished-at="2017-09-06T05:59:24Z">
+  <suite name="Default suite" duration-ms="14765" started-at="2017-09-06T07:03:22Z" finished-at="2017-09-06T07:03:37Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="9717" started-at="2017-09-06T05:59:14Z" finished-at="2017-09-06T05:59:24Z">
-      <class name="com.coderdream.util.CommonsMailUtilTest">
-        <test-method status="PASS" signature="testSendHtmlEmailWithImg()[pri:0, instance:com.coderdream.util.CommonsMailUtilTest@6e1ec318]" name="testSendHtmlEmailWithImg" duration-ms="113" started-at="2017-09-06T13:59:14Z" finished-at="2017-09-06T13:59:15Z">
+    <test name="Default test" duration-ms="14765" started-at="2017-09-06T07:03:22Z" finished-at="2017-09-06T07:03:37Z">
+      <class name="com.coderdream.selenium.service.LoginServiceTest">
+        <test-method status="PASS" signature="login()[pri:0, instance:com.coderdream.selenium.service.LoginServiceTest@6fc6f14e]" name="login" duration-ms="14749" started-at="2017-09-06T15:03:22Z" finished-at="2017-09-06T15:03:37Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testSendHtmlEmailWithImg -->
-        <test-method status="PASS" signature="testSendSimpleTextEmail()[pri:0, instance:com.coderdream.util.CommonsMailUtilTest@6e1ec318]" name="testSendSimpleTextEmail" duration-ms="380" started-at="2017-09-06T13:59:15Z" finished-at="2017-09-06T13:59:15Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSendSimpleTextEmail -->
-        <test-method status="PASS" signature="testSendingEmailsWithAttachments()[pri:0, instance:com.coderdream.util.CommonsMailUtilTest@6e1ec318]" name="testSendingEmailsWithAttachments" duration-ms="7" started-at="2017-09-06T13:59:15Z" finished-at="2017-09-06T13:59:15Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSendingEmailsWithAttachments -->
-        <test-method status="PASS" signature="testSendingEmailsWithAttachmentsUseURL()[pri:0, instance:com.coderdream.util.CommonsMailUtilTest@6e1ec318]" name="testSendingEmailsWithAttachmentsUseURL" duration-ms="2819" started-at="2017-09-06T13:59:15Z" finished-at="2017-09-06T13:59:18Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSendingEmailsWithAttachmentsUseURL -->
-        <test-method status="PASS" signature="testSendingHtmlFormattedEmail()[pri:0, instance:com.coderdream.util.CommonsMailUtilTest@6e1ec318]" name="testSendingHtmlFormattedEmail" duration-ms="2356" started-at="2017-09-06T13:59:18Z" finished-at="2017-09-06T13:59:20Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSendingHtmlFormattedEmail -->
-        <test-method status="PASS" signature="testSendingHtmlFormattedEmailWithEmbeddedImages()[pri:0, instance:com.coderdream.util.CommonsMailUtilTest@6e1ec318]" name="testSendingHtmlFormattedEmailWithEmbeddedImages" duration-ms="3495" started-at="2017-09-06T13:59:20Z" finished-at="2017-09-06T13:59:24Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSendingHtmlFormattedEmailWithEmbeddedImages -->
-        <test-method status="PASS" signature="testSendingHtmlFormattedEmail_02()[pri:0, instance:com.coderdream.util.CommonsMailUtilTest@6e1ec318]" name="testSendingHtmlFormattedEmail_02" duration-ms="517" started-at="2017-09-06T13:59:24Z" finished-at="2017-09-06T13:59:24Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testSendingHtmlFormattedEmail_02 -->
-      </class> <!-- com.coderdream.util.CommonsMailUtilTest -->
+        </test-method> <!-- login -->
+      </class> <!-- com.coderdream.selenium.service.LoginServiceTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -2,6 +2,11 @@
 maven, spring 4.3.9
 
 
+2017090605
+----------
+
+
+将截图放到网站下面，邮件中用URL路径
 
 mail.properties
 
