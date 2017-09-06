@@ -71,7 +71,7 @@ public class TestAndSendMailJob {
 		logger.debug("项目服务器脚本文件路径:" + proPath);
 		logger.debug("项目部署的路径:" + allClassPath);
 		// logger.debug("获取所有的类路径:" + path );
-		String driverURL = classPath + "\\chromedriver.exe";
+		String driverURL = classPath + "chromedriver.exe";
 		logger.debug("driverURL的路径:" + driverURL);
 		System.setProperty("webdriver.chrome.driver", driverURL);
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
