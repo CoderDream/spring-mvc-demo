@@ -2,10 +2,16 @@
 maven, spring 4.3.9
 
 
+2017090604
+----------
+
+- 增加Apache Commons-Email插件，用于发邮件
+- 通过commons-email将Selenium生成的截屏嵌入电子邮件正文中
+
 2017090603
 ----------
 
-- 增加selenium 3.5
+- 增加 Selenium 3.5
 - 支持Chrome测试
 
 
