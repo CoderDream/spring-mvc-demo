@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/mvc
            http://www.springframework.org/schema/mvc/spring-mvc.xsd 
@@ -32,5 +31,37 @@
 		<property name="prefix" value="/"></property>
 		<!-- 配置URl后缀 -->
 		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 要执行任务的任务类。 -->
+	<bean id="testAndSendMailQuartz" class="com.coderdream.job.TestAndSendMailJob">
+	</bean>
+
+	<!-- 将需要执行的定时任务注入JOB中。 -->
+	<bean id="testAndSendMailJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="testAndSendMailQuartz"></property>
+		<!-- 任务类中需要执行的方法 -->
+		<property name="targetMethod" value="testAndSendMail"></property>
+		<!-- 上一次未执行完成的，要等待有再执行。 -->
+		<property name="concurrent" value="false"></property>
+	</bean>
+
+	<!-- Run the job every 5 seconds -->
+	<bean id="cronTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="testAndSendMailJob" />
+		<!-- http://www.pppet.net/ -->
+		<!-- 整点执行一次 0 0 * * * ? * -->
+		<property name="cronExpression" value="0 0/1 * * * ?" />
+	</bean>
+
+	<bean id="schedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger"></ref>
+			</list>
+		</property>
 	</bean>
 </beans>

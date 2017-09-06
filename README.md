@@ -2,6 +2,23 @@
 maven, spring 4.3.9
 
 
+
+mail.properties
+
+	#mail sender settings
+	# for example: smtp.sina.cn
+	mail.server=smtp.126.com
+	mail.port=25
+	#the sender mail
+	mail.sender=xxxx@126.com
+	#the sender nickname
+	mail.nickname=acoderxxxxx
+	#sender mail username
+	mail.username=acoder
+	#sender mail password
+	mail.password=xxxx
+	mail.mailto=xxxx@qq.com
+
 2017090604
 ----------
 

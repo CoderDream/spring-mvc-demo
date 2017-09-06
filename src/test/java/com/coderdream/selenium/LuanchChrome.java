@@ -20,20 +20,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.testng.annotations.Test;
 
+import com.coderdream.util.Constants;
+
 public class LuanchChrome {
 
 	private static Logger logger = LoggerFactory.getLogger(LuanchChrome.class);
 
-	String DRIVER_LOCATION = "D:\\chromedriver_232";
-
-	String BASE_URL = "http://localhost:8088/spring-mvc-demo/";
-
-	String COMPLEX_DATE_FORMAT2 = "yyyyMMddHHmmssSSS";
-
 	@Test
 	public void luanchChrome() {
 		System.setProperty("webdriver.chrome.driver",
-						DRIVER_LOCATION + "\\chromedriver.exe");
+						Constants.DRIVER_LOCATION + "\\chromedriver.exe");
 
 		// 初始化一个chrome浏览器实例，实例名称叫driver
 		WebDriver driver = new ChromeDriver();
@@ -54,7 +50,7 @@ public class LuanchChrome {
 	@Test
 	public void luanchLogin() {
 		System.setProperty("webdriver.chrome.driver",
-						DRIVER_LOCATION + "\\chromedriver.exe");
+						Constants.DRIVER_LOCATION + "\\chromedriver.exe");
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments(Arrays.asList("--disable-infobars", "--no-sandbox",
@@ -79,7 +75,7 @@ public class LuanchChrome {
 
 		String username = "admin";
 		String password = "123456";
-		String url = UriComponentsBuilder.fromHttpUrl(BASE_URL).build()
+		String url = UriComponentsBuilder.fromHttpUrl(Constants.BASE_URL).build()
 						.toUriString();
 		// get()打开一个站点
 		driver.get(url);
@@ -128,7 +124,7 @@ public class LuanchChrome {
 	}
 
 	public void snapshot(String picname, WebDriver driver) {
-		SimpleDateFormat sf = new SimpleDateFormat(COMPLEX_DATE_FORMAT2);
+		SimpleDateFormat sf = new SimpleDateFormat(Constants.COMPLEX_DATE_FORMAT2);
 		picname = sf.format(new Date()) + "_" + picname + ".png";
 		logger.debug("picname\t {}", picname);
 

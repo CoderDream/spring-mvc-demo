@@ -7,12 +7,12 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.testng.annotations.Test;
 
+import com.coderdream.util.Constants;
+
 public class MyControllerTest {
 
 	private static Logger logger = LoggerFactory
 					.getLogger(MyControllerTest.class);
-
-	String BASE_URL = "http://localhost:8088/spring-mvc-demo/";
 
 	@Test
 	public void hello() {
@@ -20,8 +20,8 @@ public class MyControllerTest {
 		String password = "123456";
 		RestTemplate restTemplate = new RestTemplate();
 		String url = UriComponentsBuilder
-						.fromHttpUrl(BASE_URL + "login?username=" + username
-										+ "&password=" + password)
+						.fromHttpUrl(Constants.BASE_URL + "login?username="
+										+ username + "&password=" + password)
 						.build().toUriString();
 		logger.debug("url {} ", url);
 		ResponseEntity<?> responseEntity = restTemplate.getForEntity(url,
