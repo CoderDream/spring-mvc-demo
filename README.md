@@ -5,8 +5,13 @@ maven, spring 4.3.9
 2017090605
 ----------
 
+- 将截图放到网站下面，邮件中用URL路径
 
-将截图放到网站下面，邮件中用URL路径
+dispatcher-servlet.xml
+
+	<!-- Spring MVC不处理静态资源 -->
+	<mvc:default-servlet-handler />
+
 
 mail.properties
 
