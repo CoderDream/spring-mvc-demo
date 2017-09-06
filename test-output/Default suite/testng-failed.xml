@@ -3,11 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.coderdream.web.controller.MyControllerTest">
+      <class name="com.coderdream.selenium.LuanchChrome">
         <methods>
-          <include name="hello"/>
+          <include name="luanchLogin"/>
         </methods>
-      </class> <!-- com.coderdream.web.controller.MyControllerTest -->
+      </class> <!-- com.coderdream.selenium.LuanchChrome -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

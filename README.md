@@ -2,6 +2,42 @@
 maven, spring 4.3.9
 
 
+2017090603
+----------
+
+- 增加selenium 3.5
+- 支持Chrome测试
+
+
+谷歌驱动下载地址：
+
+http://chromedriver.storage.googleapis.com/index.html
+
+对应版本：
+
+	v2.21  v46-50
+	
+	v2.22  v49-52
+	
+	v2.23  v51-53
+	
+	v2.24  v52-57
+	
+	v2.25  v53-55
+	
+	v2.26  v53-55
+	
+	v2.27  v54-56
+	
+	v2.28  v55-57
+	
+	v2.29  v56-58
+
+解决【chrome正受到自动测试软件的控制】提示问题（为驱动添加配置参数）
+
+https://stackoverflow.com/questions/43143014/chrome-is-being-controlled-by-automated-test-software/43145088
+
+
 2017090602
 ----------
 
