@@ -61,7 +61,7 @@ public class LoginService {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 		contents.add(snapshot(method, driver));
 
 		// login-btn
@@ -90,8 +90,16 @@ public class LoginService {
 			// 下面代码是得到截图并保存在D盘下
 			File screenShotFile = ((TakesScreenshot) driver)
 							.getScreenshotAs(OutputType.FILE);
-			filePath = System.getProperty("user.dir") + "\\src\\main\\webapp\\snapshot\\"
-							+ picname;
+			// 类加载根路径
+			String classPath = this.getClass().getResource("/").getPath();
+			classPath = classPath.replace("WEB-INF/classes/", "");
+			logger.debug("类加载根路径:" + classPath);
+			// if(jetty)
+			// filePath = System.getProperty("user.dir") +
+			// "\\src\\main\\webapp\\snapshot\\"
+			// + picname;
+			filePath = classPath + "\\snapshot\\" + picname;
+			logger.debug("保存文件路径:" + filePath);
 			FileUtils.copyFile(screenShotFile, new File(filePath));
 
 			// Thread.sleep(1000);

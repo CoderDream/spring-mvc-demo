@@ -1,5 +1,8 @@
 package com.coderdream.job;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -31,8 +34,46 @@ public class TestAndSendMailJob {
 		String currentTime = sf.format(today);
 		logger.debug("testAndSendMailJob at: " + currentTime);
 
-		System.setProperty("webdriver.chrome.driver",
-						Constants.DRIVER_LOCATION + "\\chromedriver.exe");
+		// 类加载根路径
+		String classPath = this.getClass().getResource("/").getPath();
+		classPath = classPath.replace("WEB-INF/classes/", "");
+		logger.debug("类加载根路径:" + classPath);
+
+		// 类加载根路径
+		URL xmlPath = this.getClass().getClassLoader().getResource("");
+
+		// 类所在工程根路径
+		String proClassPath = this.getClass().getResource("").getPath();
+
+		// 项目服务器脚本文件路径
+		File directory = new File("");// 参数为空
+		String proRootPath = "";
+		try {
+			proRootPath = directory.getCanonicalPath();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// 项目服务器脚本文件路径
+		String proPath = System.getProperty("user.dir");
+
+		// 获取所有的类路径 包括jar包的路径
+		String allClassPath = System.getProperty("java.class.path");
+
+		// 项目部署的路径
+		// String path =
+		// request.getSession().getServletContext().getRealPath("/");
+
+		logger.debug("类加载根路径:" + xmlPath);
+		logger.debug("类所在工程路径:" + proClassPath);
+		logger.debug("项目服务器脚本文件路径:" + proRootPath);
+		logger.debug("项目服务器脚本文件路径:" + proPath);
+		logger.debug("项目部署的路径:" + allClassPath);
+		// logger.debug("获取所有的类路径:" + path );
+		String driverURL = classPath + "\\chromedriver.exe";
+		logger.debug("driverURL的路径:" + driverURL);
+		System.setProperty("webdriver.chrome.driver", driverURL);
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments(Arrays.asList("--disable-infobars"));
@@ -90,6 +131,6 @@ public class TestAndSendMailJob {
 	public static void main(String[] args) {
 		new TestAndSendMailJob().testAndSendMail();
 
-		// System.out.println(System.getProperty("user.dir"));
+		// logger.debug(System.getProperty("user.dir"));
 	}
 }

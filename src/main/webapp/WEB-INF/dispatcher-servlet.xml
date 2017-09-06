@@ -50,7 +50,7 @@
 		<property name="jobDetail" ref="testAndSendMailJob" />
 		<!-- http://www.pppet.net/ -->
 		<!-- 整点执行一次 0 0 * * * ? * -->
-		<property name="cronExpression" value="0 0/5 * * * ?" />
+		<property name="cronExpression" value="0 0/1 * * * ?" />
 	</bean>
 
 	<bean id="schedulerFactoryBean"
