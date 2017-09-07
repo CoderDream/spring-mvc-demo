@@ -31,12 +31,6 @@ public class LoginService {
 		List<String> contents = new ArrayList<String>();
 		String method = Thread.currentThread().getStackTrace()[1]
 						.getMethodName();
-		String url = UriComponentsBuilder.fromHttpUrl(Constants.BASE_URL)
-						.build().toUriString();
-		// get()打开一个站点
-		driver.get(url);
-		// getTitle()获取当前页面title的值
-		logger.debug("当前打开页面的标题是： {}", driver.getTitle());
 
 		// 设置username
 		driver.findElement(By.id("username")).clear();
