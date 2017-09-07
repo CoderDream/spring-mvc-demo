@@ -1,13 +1,13 @@
 package com.coderdream.job;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Dimension;
@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import com.coderdream.selenium.service.LoginService;
 import com.coderdream.util.CommonsMailUtil;
+import com.coderdream.util.ConfigLoader;
 import com.coderdream.util.Constants;
 
 public class TestAndSendMailJob {
@@ -27,6 +28,24 @@ public class TestAndSendMailJob {
 					.getLogger(TestAndSendMailJob.class);
 
 	public void testAndSendMail() {
+		
+		String chromePath = "chrome.properties";
+		
+		// 类初始化后加载配置文件
+		InputStream in = ConfigLoader.class.getClassLoader()
+						.getResourceAsStream(chromePath);
+		Properties props = new Properties();
+		try {
+			props.load(in);
+		} catch (IOException e) {
+			logger.error("load mail setting error,pleace check the file path:"
+							+ chromePath);
+			logger.error(e.toString(), e);
+		}
+		String chromedriver = props.getProperty("chromedriver");
+		String chrome = props.getProperty("chrome");
+		logger.debug("chromedriver路径:" + chromedriver);
+		logger.debug("chrome路径:" + chrome);
 
 		Date today = new Date();
 		SimpleDateFormat sf = new SimpleDateFormat(
@@ -34,53 +53,18 @@ public class TestAndSendMailJob {
 		String currentTime = sf.format(today);
 		logger.debug("testAndSendMailJob at: " + currentTime);
 
-		// 类加载根路径
-		String classPath = this.getClass().getResource("/").getPath();
-		classPath = classPath.replace("WEB-INF/classes/", "");
-		logger.debug("类加载根路径:" + classPath);
-
-		// 类加载根路径
-		URL xmlPath = this.getClass().getClassLoader().getResource("");
-
-		// 类所在工程根路径
-		String proClassPath = this.getClass().getResource("").getPath();
-
-		// 项目服务器脚本文件路径
-		File directory = new File("");// 参数为空
-		String proRootPath = "";
-		try {
-			proRootPath = directory.getCanonicalPath();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// 项目服务器脚本文件路径
-		String proPath = System.getProperty("user.dir");
-
-		// 获取所有的类路径 包括jar包的路径
-		String allClassPath = System.getProperty("java.class.path");
-
-		// 项目部署的路径
-		// String path =
-		// request.getSession().getServletContext().getRealPath("/");
-
-		logger.debug("类加载根路径:" + xmlPath);
-		logger.debug("类所在工程路径:" + proClassPath);
-		logger.debug("项目服务器脚本文件路径:" + proRootPath);
-		logger.debug("项目服务器脚本文件路径:" + proPath);
-		logger.debug("项目部署的路径:" + allClassPath);
-		// logger.debug("获取所有的类路径:" + path );
-		String driverURL = classPath + "chromedriver.exe";
-		logger.debug("driverURL的路径:" + driverURL);
-		System.setProperty("webdriver.chrome.driver", driverURL);
+		System.setProperty("webdriver.chrome.driver", chromedriver);
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		ChromeOptions options = new ChromeOptions();
+		// 设置Chrome不显示提示
 		options.addArguments(Arrays.asList("--disable-infobars"));
 		capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
+		// 设置Chrome.exe（二进制文件）的路径
+		options.setBinary(chrome);
+		
 		// 初始化一个chrome浏览器实例，实例名称叫driver
-		ChromeDriver driver = new ChromeDriver(capabilities);
+		ChromeDriver driver = new ChromeDriver(capabilities); 
 
 		// 自定义浏览器窗口大小
 		driver.manage().window().setSize(new Dimension(720, 540));
