@@ -2,6 +2,22 @@
 maven, spring 4.3.9
 
 
+2017090701
+----------
+
+- 将Chrome路径放到配置文件中
+
+webdriver + jenkins执行用例报“unknown error: cannot find Chrome binary”
+
+http://blog.csdn.net/dreamtl/article/details/53486563
+
+	System.setProperty("webdriver.chrome.driver", "files/chromedriver.exe");
+	ChromeOptions options = new ChromeOptions();
+	options.setBinary("chrome.exe路径");
+	ChromeDriver driver = new ChromeDriver(options);
+
+
+
 2017090605
 ----------
 
@@ -34,21 +50,6 @@ mail.properties
 
 - 增加Apache Commons-Email插件，用于发邮件
 - 通过commons-email将Selenium生成的截屏嵌入电子邮件正文中
-
-
-2017090701
-----------
-
-- 将Chrome路径放到配置文件中
-
-webdriver + jenkins执行用例报“unknown error: cannot find Chrome binary”
-
-http://blog.csdn.net/dreamtl/article/details/53486563
-
-	System.setProperty("webdriver.chrome.driver", "files/chromedriver.exe");
-	ChromeOptions options = new ChromeOptions();
-	options.setBinary("chrome.exe路径");
-	ChromeDriver driver = new ChromeDriver(options);
 
 2017090603
 ----------
