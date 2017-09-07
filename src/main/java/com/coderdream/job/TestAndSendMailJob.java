@@ -97,9 +97,9 @@ public class TestAndSendMailJob {
 
 			// URL
 			String imgUrl = Constants.BASE_URL + "snapshot/" + fileName;
-			aHtml.append("<div style=\"width: 720px; height: 540px; border: 1px solid #001\">");
-			aHtml.append("<img src=\"" + imgUrl + "\">");
-			aHtml.append("</div><br>");
+			//aHtml.append("<div style=\"width: 720px; height: 540px; border: 1px solid #001\">");
+			aHtml.append("<img src=\"" + imgUrl + "\" style=\"border:solid 1px #000;\"><br>");
+			//aHtml.append("</div><br>");
 		}
 
 		aHtml.append("</html>");
