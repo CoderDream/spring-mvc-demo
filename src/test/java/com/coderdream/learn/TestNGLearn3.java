@@ -1,5 +1,8 @@
 package com.coderdream.learn;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -24,6 +27,12 @@ public class TestNGLearn3 {
 	@Test
 	public void testMethod1() {
 		System.out.println("this is testMethod1 test case： priority = 10");
+		List<String> strs = new ArrayList<>();
+		strs.add("A");
+		strs.add("B");
+		strs.add("C");
+		strs.add("D");
+		System.out.println(strs.toString());
 	}
 
 	@Test
