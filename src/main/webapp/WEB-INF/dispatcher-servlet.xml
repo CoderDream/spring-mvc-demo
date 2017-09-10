@@ -80,7 +80,9 @@
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
+				<!-- 
 				<ref bean="cronTrigger2"></ref>
+				 -->
 			</list>
 		</property>
 	</bean>
