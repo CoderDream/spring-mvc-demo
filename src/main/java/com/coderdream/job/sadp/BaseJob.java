@@ -21,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.coderdream.util.CommonsMailUtil;
 import com.coderdream.util.ConfigLoader;
 import com.coderdream.util.Constants;
+import com.coderdream.util.SystemTool;
 
 public class BaseJob {
 
@@ -44,7 +45,8 @@ public class BaseJob {
 			logger.error(e.toString(), e);
 		}
 		String chromedriver = props.getProperty("chromedriver");
-		String chrome = props.getProperty("chrome");
+		String chrome = props
+						.getProperty("chrome" + SystemTool.getMacAddress());
 		logger.debug("chromedriver路径:" + chromedriver);
 		logger.debug("chrome路径:" + chrome);
 
@@ -75,9 +77,10 @@ public class BaseJob {
 		// driver.manage().window().maximize();
 		// 设置隐性等待时间
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-		
-		String url = UriComponentsBuilder.fromHttpUrl(props.getProperty("pdrcurl"))
-						.build().toUriString();
+
+		String url = UriComponentsBuilder
+						.fromHttpUrl(props.getProperty("pdrcurl")).build()
+						.toUriString();
 		// get()打开一个站点
 		driver.get(url);
 		// getTitle()获取当前页面title的值
@@ -88,18 +91,21 @@ public class BaseJob {
 		// set the html message
 		StringBuilder aHtml = new StringBuilder("<html>");
 
+		int i = 0;
 		for (Map.Entry<String, String> entry : map.entrySet()) {
 			System.out.println("Key = " + entry.getKey() + ", Value = "
 							+ entry.getValue());
-			String stepName = entry.getKey();
-			String fileName = entry.getValue();
+			i++;
+			String fileName = entry.getKey();
+			String stepName = entry.getValue();
 			// 绝对路径
 			// String imgUrl = System.getProperty("user.dir") +
 			// "\\src\\main\\webapp\\snapshot\\"
 			// + fileName;
-			aHtml.append("<div>" + stepName + "</div>");
+			aHtml.append("<div><span style=\"font-size:18px;\">" + i + "、"
+							+ stepName + "</span></div>");
 			// URL
-			//String imgUrl = Constants.BASE_URL + "snapshot/" + fileName;
+			// String imgUrl = Constants.BASE_URL + "snapshot/" + fileName;
 			// aHtml.append("<div style=\"width: 720px; height: 540px; border:
 			// 1px solid #001\">");
 			aHtml.append("<img src=\"" + fileName
@@ -119,5 +125,12 @@ public class BaseJob {
 
 	public void tearDown() {
 		driver.quit();
+		String processName = "chromedriver.exe";
+		String command = "taskkill /f /im " + processName;
+		try {
+			Runtime.getRuntime().exec(command);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

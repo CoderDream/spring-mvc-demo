@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +29,8 @@ public class BaseSadpService {
 	 * @param staffName
 	 */
 	public void login(WebDriver driver, String roleName, String staffName) {
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+		// String method = Thread.currentThread().getStackTrace()[1]
+		// .getMethodName();
 
 		// 点击下拉选单
 		driver.findElement(By.id("roleName")).click();
@@ -397,6 +398,31 @@ public class BaseSadpService {
 			// 下面代码是得到截图并保存在D盘下
 			File screenShotFile = ((TakesScreenshot) driver)
 							.getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(screenShotFile, new File(fileName));
+
+			// Thread.sleep(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return fileName;
+	}
+
+	public String snapshot2(String picname, WebElement element) {
+		SimpleDateFormat sf = new SimpleDateFormat(
+						Constants.COMPLEX_DATE_FORMAT2);
+		picname = sf.format(new Date()) + "_" + picname + ".png";
+		logger.debug("picname\t {}", picname);
+
+		String fileName = System.getProperty("user.dir") + "\\snapshot\\"
+						+ picname;
+
+		// 这里等待页面加载完成
+		try {
+			// Thread.sleep(1000);
+
+			// 下面代码是得到截图并保存在D盘下
+			File screenShotFile = element.getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(screenShotFile, new File(fileName));
 
 			// Thread.sleep(1000);
