@@ -20,8 +20,7 @@ import com.coderdream.util.Constants;
 
 public class BaseSadpService {
 
-	private static Logger logger = LoggerFactory
-					.getLogger(BaseSadpService.class);
+	private static Logger logger = LoggerFactory.getLogger(BaseSadpService.class);
 
 	/**
 	 * @param driver
@@ -45,13 +44,11 @@ public class BaseSadpService {
 		// snapshot(method, driver);
 
 		// 根据传入的值选择下拉选单，点击该项目
-		driver.findElement(By.xpath("//option[text()='" + roleName + "']"))
-						.click();
+		driver.findElement(By.xpath("//option[text()='" + roleName + "']")).click();
 
 		// snapshot(method, driver);
 		// 设置值
-		Select selectRoleName = new Select(
-						driver.findElement(By.id("roleName")));
+		Select selectRoleName = new Select(driver.findElement(By.id("roleName")));
 		// snapshot(method, driver);
 		selectRoleName.selectByVisibleText(roleName);
 
@@ -74,7 +71,7 @@ public class BaseSadpService {
 
 		// 根据传入的值选择下拉选单，点击该项目
 		driver.findElement(By.xpath("//option[text()='" + staffName + "']"))
-						.click();
+				.click();
 		// 设置值
 		Select selectUser = new Select(driver.findElement(By.id("staff")));
 		selectUser.selectByVisibleText(staffName);
@@ -104,8 +101,7 @@ public class BaseSadpService {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
 		String fileName = snapshot(method, driver);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("登陆【新建审计】页面", fileName);
@@ -113,11 +109,10 @@ public class BaseSadpService {
 	}
 
 	public void enterToAuditPage(WebDriver driver, String projectName) {
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
 		// 绝对匹配
 		driver.findElement(By.xpath("//span[text()='" + projectName + "']"))
-						.click();
+				.click();
 
 		try {
 			Thread.sleep(2000);
@@ -134,7 +129,7 @@ public class BaseSadpService {
 	 * @param projectName
 	 */
 	public void setProjectInfoAndEnterToAuditPage(WebDriver driver,
-					String queryString, String projectName) {
+			String queryString, String projectName) {
 		// 清空输入框
 		driver.findElement(By.id("autocomplete_input_project")).clear();
 		try {
@@ -145,19 +140,17 @@ public class BaseSadpService {
 
 		// 输入查询条件
 		driver.findElement(By.id("autocomplete_input_project"))
-						.sendKeys(queryString);
+				.sendKeys(queryString);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
 		snapshot(method, driver);
 
 		// 选择查询结果
-		driver.findElement(By.xpath("//li[text()='" + projectName + "']"))
-						.click();
+		driver.findElement(By.xpath("//li[text()='" + projectName + "']")).click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -190,15 +183,13 @@ public class BaseSadpService {
 			e.printStackTrace();
 		}
 
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
 		snapshot(method, driver);
 	}
 
 	public void addAuditItem(WebDriver driver, String auditItemName,
-					String auditContent, Boolean passFlag) {
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+			String auditContent, Boolean passFlag) {
+		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
 		// 点击下拉选单
 		driver.findElement(By.id("auditItem")).click();
 		snapshot(method, driver);
@@ -212,7 +203,7 @@ public class BaseSadpService {
 
 		// 根据传入的值选择下拉选单，点击该项目
 		driver.findElement(By.xpath("//option[text()='" + auditItemName + "']"))
-						.click();
+				.click();
 		snapshot(method, driver);
 
 		try {
@@ -221,8 +212,7 @@ public class BaseSadpService {
 			e.printStackTrace();
 		}
 		// 设置值
-		Select selectRoleName = new Select(
-						driver.findElement(By.id("auditItem")));
+		Select selectRoleName = new Select(driver.findElement(By.id("auditItem")));
 		selectRoleName.selectByVisibleText(auditItemName);
 
 		try {
@@ -282,8 +272,7 @@ public class BaseSadpService {
 	 * @param driver
 	 * @param auditItemName
 	 */
-	public void enterToEditAuditItemPage(WebDriver driver,
-					String auditItemName) {
+	public void enterToEditAuditItemPage(WebDriver driver, String auditItemName) {
 		// 链接文字
 		driver.findElement(By.linkText(auditItemName)).click();
 		try {
@@ -292,13 +281,12 @@ public class BaseSadpService {
 			e.printStackTrace();
 		}
 
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
 		snapshot(method, driver);
 	}
 
 	public void editAuditItem(WebDriver driver, String auditContent,
-					Boolean passFlag) {
+			Boolean passFlag) {
 		// 设置评价内容
 		driver.findElement(By.id("auditContent")).clear();
 		driver.findElement(By.id("auditContent")).sendKeys(auditContent);
@@ -308,8 +296,7 @@ public class BaseSadpService {
 			e.printStackTrace();
 		}
 
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
 		snapshot(method, driver);
 
 		// pass or fail 通过Label点击
@@ -359,8 +346,7 @@ public class BaseSadpService {
 			e.printStackTrace();
 		}
 
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
 		snapshot(method, driver);
 
 		try {
@@ -383,24 +369,18 @@ public class BaseSadpService {
 	}
 
 	public String snapshot(String picname, WebDriver driver) {
-		SimpleDateFormat sf = new SimpleDateFormat(
-						Constants.COMPLEX_DATE_FORMAT2);
+		SimpleDateFormat sf = new SimpleDateFormat(Constants.COMPLEX_DATE_FORMAT2);
 		picname = sf.format(new Date()) + "_" + picname + ".png";
 		logger.debug("picname\t {}", picname);
 
-		String fileName = System.getProperty("user.dir") + "\\snapshot\\"
-						+ picname;
+		String fileName = System.getProperty("user.dir") + "\\snapshot\\" + picname;
 
 		// 这里等待页面加载完成
 		try {
-			// Thread.sleep(1000);
-
 			// 下面代码是得到截图并保存在D盘下
 			File screenShotFile = ((TakesScreenshot) driver)
-							.getScreenshotAs(OutputType.FILE);
+					.getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(screenShotFile, new File(fileName));
-
-			// Thread.sleep(1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -409,13 +389,11 @@ public class BaseSadpService {
 	}
 
 	public String snapshot2(String picname, WebElement element) {
-		SimpleDateFormat sf = new SimpleDateFormat(
-						Constants.COMPLEX_DATE_FORMAT2);
+		SimpleDateFormat sf = new SimpleDateFormat(Constants.COMPLEX_DATE_FORMAT2);
 		picname = sf.format(new Date()) + "_" + picname + ".png";
 		logger.debug("picname\t {}", picname);
 
-		String fileName = System.getProperty("user.dir") + "\\snapshot\\"
-						+ picname;
+		String fileName = System.getProperty("user.dir") + "\\snapshot\\" + picname;
 
 		// 这里等待页面加载完成
 		try {
@@ -450,23 +428,17 @@ class SnapThread extends Thread {
 
 	public void run() {
 		System.out.println(getName() + " 线程运行开始!");
-		SimpleDateFormat sf = new SimpleDateFormat(
-						Constants.COMPLEX_DATE_FORMAT2);
+		SimpleDateFormat sf = new SimpleDateFormat(Constants.COMPLEX_DATE_FORMAT2);
 		picname = sf.format(new Date()) + "_" + picname + ".png";
 		logger.debug("picname\t {}", picname);
 
 		// 这里等待页面加载完成
 		try {
-			// Thread.sleep(1000);
-
 			// 下面代码是得到截图并保存在D盘下
 			File screenShotFile = ((TakesScreenshot) driver)
-							.getScreenshotAs(OutputType.FILE);
+					.getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(screenShotFile,
-							new File(System.getProperty("user.dir")
-											+ "\\snapshot\\" + picname));
-
-			// Thread.sleep(1000);
+					new File(System.getProperty("user.dir") + "\\snapshot\\" + picname));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
