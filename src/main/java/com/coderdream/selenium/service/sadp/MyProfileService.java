@@ -1,13 +1,16 @@
 package com.coderdream.selenium.service.sadp;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
+import org.openqa.selenium.support.ui.Select;
 
 public class MyProfileService extends BaseSadpService {
 
@@ -102,8 +105,8 @@ public class MyProfileService extends BaseSadpService {
 						.getMethodName();
 		String linkText = "技能列表";
 		// 根据传入的值选择下拉选单，点击该项目
-		WebElement element = driver.findElement(By.linkText(linkText));
-		element.click();
+		driver.findElement(By.linkText(linkText)).click();
+		map.put(snapshot(method, driver), "进入技能新增页面：");
 
 		driver.findElement(By.id("autocomplete_input_skill"))
 						.sendKeys(skillName);
@@ -112,7 +115,7 @@ public class MyProfileService extends BaseSadpService {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		map.put(snapshot(method, driver), "点击技能");
+		map.put(snapshot(method, driver), "输入技能" + skillName + ":");
 
 		driver.findElement(By.xpath("//span[text()='" + skillName + "']"))
 						.click();
@@ -122,9 +125,60 @@ public class MyProfileService extends BaseSadpService {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		map.put(snapshot(method, driver), "选择技能" + skillName + ":");
 
 		// 点击【熟练程度下拉框】
+		// String linkText2 = "--请选择熟练程度--";
+		// driver.findElement(By.xpath("//span[text()='" + linkText2 + "']"))
+		// .click();
+
+		// driver.findElement(By.id("proficiencyItem-button")).click();
+		// try {
+		// Thread.sleep(1000);
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// }
+		// map.put(snapshot(method, driver), "点击【熟练程度下拉框】：");
+		// try {
+		// Thread.sleep(1000);
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// }
+
+//		driver.findElement(By.id("proficiency-button")).click();
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//		map.put(snapshot(method, driver), "点击【熟练程度下拉框】：");
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//		map.put(snapshot(method, driver), "点击【熟练程度下拉框】：");
 		driver.findElement(By.id("proficiencyItem")).click();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		map.put(snapshot(method, driver), "点击【熟练程度下拉框】：");
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		map.put(snapshot(method, driver), "点击【熟练程度下拉框】：");
+
+		Select selectRoleName = new Select(
+						driver.findElement(By.id("proficiencyItem")));
+		// selectRoleName.c
+		// driver.findElement(By.id("proficiencyItem")).click();
+		// map.put(snapshot(method, driver), "点击【熟练程度下拉框】：");
+		// selectRoleName.selectByValue(proficiencyName); //未审核
+		selectRoleName.selectByVisibleText(proficiencyName);
 
 		try {
 			Thread.sleep(1000);
@@ -133,10 +187,10 @@ public class MyProfileService extends BaseSadpService {
 		}
 		map.put(snapshot(method, driver), "点击【熟练程度下拉框】：");
 
-		// 根据传入的值选择下拉选单，点击该项目
-		driver.findElement(
-						By.xpath("//option[text()='" + proficiencyName + "']"))
-						.click();
+		// // 根据传入的值选择下拉选单，点击该项目
+		// driver.findElement(
+		// By.xpath("//option[text()='" + proficiencyName + "']"))
+		// .click();
 
 		try {
 			Thread.sleep(1000);
@@ -163,8 +217,8 @@ public class MyProfileService extends BaseSadpService {
 		return map;
 	}
 
-	private Map<String, String> scrollTo(WebDriver driver,  
-					String method, String linkText) {
+	private Map<String, String> scrollTo(WebDriver driver, String method,
+					String linkText) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		// 滚动到领域
 		WebElement element = driver.findElement(
@@ -178,7 +232,7 @@ public class MyProfileService extends BaseSadpService {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 		return map;
 	}
 
@@ -207,8 +261,8 @@ public class MyProfileService extends BaseSadpService {
 
 		// 点击【熟练程度下拉框】
 		WebElement element = driver.findElement(By.id("proficiencyItem"));
-		//map.put(snapshot2(method, element), "点击【熟练程度下拉框111】：");
-		
+		// map.put(snapshot2(method, element), "点击【熟练程度下拉框111】：");
+
 		element.click();
 		map.put(snapshot(method, driver), "点击【熟练程度下拉框】：");
 
@@ -242,7 +296,7 @@ public class MyProfileService extends BaseSadpService {
 
 		// 点击确定按钮
 		driver.findElement(By.xpath("//span[text()='确定']")).click();
-		
+
 		String linkText = "领域列表";
 		map.putAll(scrollTo(driver, method, linkText));
 
@@ -322,5 +376,46 @@ public class MyProfileService extends BaseSadpService {
 		map.put(snapshot(method, driver), "点击【确定】按钮");
 
 		return map;
+	}
+
+	/**
+	 * 获取选项列表
+	 * 
+	 * @return
+	 */
+	public List<WebElement> getOptions(WebElement element) {
+		return element.findElements(By.tagName("option"));
+	}
+
+	/**
+	 * 根据select的value来选择
+	 * 
+	 * @param value
+	 */
+	public void setOptionByValue(WebElement element, String value) {
+		for (WebElement op : getOptions(element)) {
+			if (op.getAttribute("value").equals(value)) {
+				op.click();
+				return;
+			}
+		}
+		throw new NoSuchElementException(
+						"Cannot locate an element in Select-setOptionByValue ");
+	}
+
+	/**
+	 * 根据显示的文本来选择
+	 * 
+	 * @param text
+	 */
+	public void setOptionByText(WebElement element, String text) {
+		for (WebElement op : getOptions(element)) {
+			if (op.getText().equals(text)) {
+				op.click();
+				return;
+			}
+		}
+		throw new NoSuchElementException(
+						"Cannot locate an element in Select-setOptionByText ");
 	}
 }
