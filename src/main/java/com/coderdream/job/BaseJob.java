@@ -71,12 +71,12 @@ public class BaseJob {
 		driver = new ChromeDriver(capabilities);
 
 		// 自定义浏览器窗口大小
-		driver.manage().window().setSize(new Dimension(550, 730));
+		// driver.manage().window().setSize(new Dimension(550, 730));
 
 		// 最大化窗口
 		// driver.manage().window().maximize();
 		// 设置隐性等待时间
-		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+		// driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 
 		// "pdrcurl"
 		String url = UriComponentsBuilder
