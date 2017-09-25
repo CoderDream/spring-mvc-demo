@@ -1,4 +1,4 @@
-package com.coderdream.job.sadp;
+package com.coderdream.job.pa;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,40 +10,55 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.coderdream.job.BaseJob;
-import com.coderdream.selenium.service.sadp.MyProfileService;
+import com.coderdream.selenium.service.sadp.ProjectAuditService;
 
-public class MyProfileServiceJob extends BaseJob {
+public class ProjectAuditServiceJob extends BaseJob {
 
 	private static Logger logger = LoggerFactory
-					.getLogger(MyProfileServiceJob.class);
+					.getLogger(ProjectAuditServiceJob.class);
 
-	private MyProfileService viewMyProfileService;
+	private ProjectAuditService viewProjectAuditService;
 
-	private String baseUrl = "pdrcurl";
-	
-	public void getMyProfile() {
-		logger.debug("getMyProfile");
+	private String baseUrl = "auditurl";
+
+	public void getProjectAudit() {
+		logger.debug("getProjectAudit");
 		super.setUp(baseUrl);
-		viewMyProfileService = new MyProfileService();
+		viewProjectAuditService = new ProjectAuditService();
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		String roleName = "普通员工";
-		String staffName = "[B-30728]吕帅";
+		String roleName = "QA|PMO|运营";
+		String staffName = "[B-7382]全荃";
 
 		// 登陆
-		viewMyProfileService.login(driver, roleName, staffName);
+		viewProjectAuditService.login(driver, roleName, staffName);
 
 		// 进入【我的人力看板】页面
-		map.putAll(viewMyProfileService.myProfile(driver));
+		map.putAll(viewProjectAuditService.newAudit(driver));
 
 		// 进入【我的基本信息】页面
-		map.putAll(viewMyProfileService.myProfileBaseInfo(driver));
 
+		String projectName = "美的-美的开利相关软件测试项目5月版本";
+		map.putAll(viewProjectAuditService.queryProject(driver, projectName));
+
+		map.putAll(viewProjectAuditService.addAudit(driver));
+
+		//
+		String auditName = "变更修正合理性";
+		// String auditTypeKey = "RO01";
+		String auditContent = "评价内容";
+		Integer auditState = 0;
 		// 修改基本信息后自动返回
-		map.putAll(viewMyProfileService.updateMyProfileBaseInfo(driver));
+		map.putAll(viewProjectAuditService.saveAudit(driver, auditName,
+						auditContent, auditState));
+
+//		String auditContentNew = "评价内容";
+//		Integer auditStateNew = 1;
+//		map.putAll(viewProjectAuditService.updateAudit(driver, auditName,
+//						auditContentNew, auditStateNew, staffName));
 
 		// 修改技能信息后自动返回
 		// String skillName = "iOS";
-		// map.putAll(viewMyProfileService.editSkill(driver, skillName));
+		// map.putAll(viewProjectAuditService.editSkill(driver, skillName));
 
 		String aSubject = "自动化测试--查看我的人力档案";
 		sendMail(map, aSubject);
@@ -52,30 +67,30 @@ public class MyProfileServiceJob extends BaseJob {
 	}
 
 	public void operateProfileSkillInfo() {
-		logger.debug("getMyProfile");
+		logger.debug("getProjectAudit");
 		super.setUp(baseUrl);
-		viewMyProfileService = new MyProfileService();
+		viewProjectAuditService = new ProjectAuditService();
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		String roleName = "普通员工";
-		String staffName = "[B-30728]吕帅";
+		String roleName = "QA|PMO|运营";
+		String staffName = "[B-7382]全荃";
 
 		// 登陆
-		viewMyProfileService.login(driver, roleName, staffName);
+		viewProjectAuditService.login(driver, roleName, staffName);
 
 		// 进入【我的人力看板】页面
-		map.putAll(viewMyProfileService.myProfile(driver));
+		map.putAll(viewProjectAuditService.newAudit(driver));
 
 		// 修改技能信息后自动返回
 		String skillName = "iOS";
 		String proficiencyName = "熟练";
-		map.putAll(viewMyProfileService.addSkill(driver, skillName,
+		map.putAll(viewProjectAuditService.addSkill(driver, skillName,
 						proficiencyName));
 
 		proficiencyName = "精通";
-		map.putAll(viewMyProfileService.editSkill(driver, skillName,
+		map.putAll(viewProjectAuditService.editSkill(driver, skillName,
 						proficiencyName));
 
-		map.putAll(viewMyProfileService.deleteSkill(driver, skillName));
+		map.putAll(viewProjectAuditService.deleteSkill(driver, skillName));
 
 		String aSubject = "自动化测试--修改人力档案的技能信息";
 		sendMail(map, aSubject);
@@ -84,8 +99,8 @@ public class MyProfileServiceJob extends BaseJob {
 	}
 
 	public static void main(String[] args) {
-		// new MyProfileServiceJob().getMyProfile();
-		new MyProfileServiceJob().operateProfileSkillInfo();
+		new ProjectAuditServiceJob().getProjectAudit();
+		// new ProjectAuditServiceJob().operateProfileSkillInfo();
 
 		// logger.debug(System.getProperty("user.dir"));
 		// String processName = "chromedriver.exe";

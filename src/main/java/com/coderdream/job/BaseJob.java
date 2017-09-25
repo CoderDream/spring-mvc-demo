@@ -1,4 +1,4 @@
-package com.coderdream.job.sadp;
+package com.coderdream.job;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,9 +28,9 @@ public class BaseJob {
 	private static Logger logger = LoggerFactory.getLogger(BaseJob.class);
 	// String baseUrl;
 
-	WebDriver driver;
+	public WebDriver driver;
 
-	public void setUp() {
+	public void setUp(String baseUrl) {
 		String chromePath = "chrome.properties";
 
 		// 类初始化后加载配置文件
@@ -78,8 +78,9 @@ public class BaseJob {
 		// 设置隐性等待时间
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 
+		// "pdrcurl"
 		String url = UriComponentsBuilder
-						.fromHttpUrl(props.getProperty("pdrcurl")).build()
+						.fromHttpUrl(props.getProperty(baseUrl)).build()
 						.toUriString();
 		// get()打开一个站点
 		driver.get(url);
@@ -87,7 +88,7 @@ public class BaseJob {
 		logger.debug("当前打开页面的标题是： {}", driver.getTitle());
 	}
 
-	void sendMail(Map<String, String> map, String aSubject) {
+	public void sendMail(Map<String, String> map, String aSubject) {
 		// set the html message
 		StringBuilder aHtml = new StringBuilder("<html>");
 
