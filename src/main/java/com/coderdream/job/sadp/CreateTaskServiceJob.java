@@ -26,6 +26,7 @@ public class CreateTaskServiceJob extends BaseJob {
 	 * 
 	 */
 	public void ceateTask() {
+		String linkText = "";
 		logger.debug("ceateTask");
 		super.setUp(baseUrl);
 		createTaskService = new CreateTaskService();
@@ -39,80 +40,99 @@ public class CreateTaskServiceJob extends BaseJob {
 		// 进入【任务看板--创建任务】页面
 		//
 		// 自定义浏览器窗口大小(16,93)
-		Dimension dimension = new Dimension(540 + 16, 865 + 93);
-		map.putAll(createTaskService.enterToTaskPage(driver, dimension));
-
-		// 进入【我的基本信息】页面
+//		Dimension dimension = new Dimension(540 + 16, 865 + 93);
+//		linkText = "任务看板--创建任务";
+//		map.putAll(createTaskService.enterToPageByLinkText(driver, dimension,
+//						linkText));
+//
+//		// 进入【我的基本信息】页面
 		String taskName = "UPET-统一训战6月版本-V2R02I02";
-		String taskDescription = "UPET-统一训战6月版本-V2R02I02";
-		String acceptanceStandard = "华为验收标准";
-		String queryString = "UPET-统一训战6月版本";
-		String projectName = "UPET-统一训战6月版本-V2R02I02";
-		String queryStringContactsName = "1691";
-		String contactsName = "[B-16916]邵京国";
-		String queryStringAcceptanceName = "邵京";
-		String acceptanceName = "[B-16916]邵京国";
-		String email = "abc@qq.com";
-		String phone = "13999999999";
-		map.putAll(createTaskService.createTaskByParams(driver, taskName,
+//		String taskDescription = "UPET-统一训战6月版本-V2R02I02";
+//		String acceptanceStandard = "华为验收标准";
+//		String queryString = "UPET-统一训战6月版本";
+//		String projectName = "UPET-统一训战6月版本-V2R02I02";
+//		String queryStringContactsName = "1691";
+//		String contactsName = "[B-16916]邵京国";
+//		String queryStringAcceptanceName = "邵京";
+//		String acceptanceName = "[B-16916]邵京国";
+//		String email = "abc@qq.com";
+//		String phone = "13999999999";
+//		Boolean addFlag = true;
+//		map.putAll(createTaskService.createAndUpdateTaskByParams(driver, taskName,
+//						taskDescription, queryString, projectName,
+//						acceptanceStandard, queryStringContactsName,
+//						contactsName, queryStringAcceptanceName, acceptanceName,
+//						email, phone, addFlag));
+//
+//		// 自定义浏览器窗口大小(16,93)
+//		dimension = new Dimension(540 + 16, 865 + 93);
+//		linkText = "任务所需资源清单";
+//		map.putAll(createTaskService.enterToPageByLinkText(driver, dimension,
+//						linkText));
+//
+//		String taskItemDescription = "UPET-统一训战6月版本-V2R02I02 集成测试";
+//		String enginnerAmount = "15";
+//		String workPlaceName = "武汉";
+//		String serviceYear = "10";
+//		String bsm = "12.5";
+//		String planStartDateString = "2017-08-01";
+//		String planEndDateString = "2017-10-01";
+//		map.putAll(createTaskService.createTaskItemByParams(driver,
+//						taskItemDescription, enginnerAmount, workPlaceName,
+//						serviceYear, bsm, planStartDateString,
+//						planEndDateString));
+
+//		// 自定义浏览器窗口大小(16,93)
+//		dimension = new Dimension(540 + 16, 365 + 93);
+//		linkText = "技能要求";
+//		map.putAll(createTaskService.enterToPageByLinkText(driver, dimension,
+//						linkText));
+//
+//		// 修改技能信息后自动返回
+//		String skillName = "iOS";
+//		String proficiencyName = "熟练";
+//		map.putAll(createTaskService.addSkill(driver, skillName,
+//						proficiencyName));
+//
+//		proficiencyName = "精通";
+//		map.putAll(createTaskService.editSkill(driver, skillName,
+//						proficiencyName));
+//
+//		map.putAll(createTaskService.deleteSkill(driver, skillName));
+//
+//		// 自定义浏览器窗口大小(16,93)
+//		dimension = new Dimension(540 + 16, 365 + 93);
+//		linkText = "领域要求";
+//		map.putAll(createTaskService.enterToPageByLinkText(driver, dimension,
+//						linkText));
+//
+//		// 修改领域信息后自动返回
+//		String domainName = "CRM";
+//		String experienceName = "部分精通";
+//		map.putAll(createTaskService.addDomain(driver, domainName,
+//						experienceName));
+//
+//		experienceName = "领域专家";
+//		map.putAll(createTaskService.editDomain(driver, domainName,
+//						experienceName));
+//
+//		map.putAll(createTaskService.deleteDomain(driver, domainName));
+
+		// 任务看板--我发布的任务
+		linkText = "任务看板--我发布的任务";
+		map.putAll(createTaskService.enterToPageByLinkText(driver, dimension,
+						linkText));
+		linkText = taskName;
+		map.putAll(createTaskService.enterToPageByLinkText(driver, dimension,
+						linkText));
+		
+		phone = "13999999999";
+		addFlag = false;
+		map.putAll(createTaskService.createAndUpdateTaskByParams(driver, taskName,
 						taskDescription, queryString, projectName,
 						acceptanceStandard, queryStringContactsName,
 						contactsName, queryStringAcceptanceName, acceptanceName,
-						email, phone));
-
-		// 自定义浏览器窗口大小(16,93)
-		dimension = new Dimension(540 + 16, 865 + 93);
-		map.putAll(createTaskService.enterToCreateTaskItemPage(driver,
-						dimension));
-
-		String taskItemDescription = "UPET-统一训战6月版本-V2R02I02 集成测试";
-		String enginnerAmount = "15";
-		String workPlaceName = "武汉";
-		String serviceYear = "10";
-		String bsm = "12.5";
-		String planStartDateString = "2017-08-01";
-		String planEndDateString = "2017-10-01";
-		map.putAll(createTaskService.createTaskItemByParams(driver,
-						taskItemDescription, enginnerAmount, workPlaceName,
-						serviceYear, bsm, planStartDateString,
-						planEndDateString));
-
-		// 自定义浏览器窗口大小(16,93)
-		dimension = new Dimension(540 + 16, 365 + 93);
-		map.putAll(createTaskService.enterToCreateSkillPage(driver, dimension));
-
-		// 修改技能信息后自动返回
-		String skillName = "iOS";
-		String proficiencyName = "熟练";
-		map.putAll(createTaskService.addSkill(driver, skillName,
-						proficiencyName));
-
-		proficiencyName = "精通";
-		map.putAll(createTaskService.editSkill(driver, skillName,
-						proficiencyName));
-
-		map.putAll(createTaskService.deleteSkill(driver, skillName));
-		
-
-		// 自定义浏览器窗口大小(16,93)
-		dimension = new Dimension(540 + 16, 365 + 93);
-		map.putAll(createTaskService.enterToCreateDomainPage(driver, dimension));
-		
-		// 修改领域信息后自动返回
-		String domainName = "CRM";
-		String experienceName = "部分精通";
-		map.putAll(createTaskService.addDomain(driver, domainName,
-						experienceName));
-
-		experienceName = "领域专家";
-		map.putAll(createTaskService.editDomain(driver, domainName,
-						experienceName));
-
-		map.putAll(createTaskService.deleteDomain(driver, domainName));
-
-
-		 // 我发布的任务
-		// map.putAll(createTaskService.updateMyProfileBaseInfo(driver));
+						email, phone, addFlag));
 
 		// 修改技能信息后自动返回 【任务所需资源清单】
 		// String skillName = "iOS";

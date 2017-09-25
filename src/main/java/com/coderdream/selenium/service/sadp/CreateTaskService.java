@@ -11,31 +11,12 @@ import org.openqa.selenium.support.ui.Select;
 
 public class CreateTaskService extends BaseSadpService {
 
-	public Map<String, String> enterToTaskPage(WebDriver driver,
-					Dimension dimension) {
-		driver.manage().window().setSize(dimension);
-		String linkText = "任务看板--创建任务";
-		// 根据传入的值选择下拉选单，点击该项目
-		driver.findElement(By.linkText(linkText)).click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
-
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put(snapshot(method, driver), "进入【" + linkText + "】页面：");
-		return map;
-	}
-
-	public Map<String, String> createTaskByParams(WebDriver driver,
+	public Map<String, String> createAndUpdateTaskByParams(WebDriver driver,
 					String taskName, String taskDescription, String queryString,
 					String projectName, String acceptanceStandard,
 					String queryStringContactsName, String contactsName,
 					String queryStringAcceptanceName, String acceptanceName,
-					String email, String phone) {
+					String email, String phone, Boolean addFlag) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		String method = Thread.currentThread().getStackTrace()[1]
 						.getMethodName();
@@ -97,8 +78,12 @@ public class CreateTaskService extends BaseSadpService {
 
 		//
 		driver.findElement(By.id("task-btn")).click();
-		map.put(snapshot(method, driver), "点击【新增】按钮，执行新增操作：");
+		String operate = "修改";
+		if (addFlag) {
+			operate = "新增";
+		}
 
+		map.put(snapshot(method, driver), "点击【" + operate + "】按钮，执行新增操作：");
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -255,25 +240,6 @@ public class CreateTaskService extends BaseSadpService {
 		snapshot(method, driver);
 	}
 
-	public Map<String, String> enterToCreateTaskItemPage(WebDriver driver,
-					Dimension dimension) {
-		driver.manage().window().setSize(dimension);
-		String linkText = "任务所需资源清单";
-		// 根据传入的值选择下拉选单，点击该项目
-		driver.findElement(By.linkText(linkText)).click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
-
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put(snapshot(method, driver), "进入【" + linkText + "】页面：");
-		return map;
-	}
-
 	public Map<String, String> createTaskItemByParams(WebDriver driver,
 					String taskItemDescription, String enginnerAmount,
 					String workPlaceName, String serviceYear, String bsm,
@@ -380,34 +346,6 @@ public class CreateTaskService extends BaseSadpService {
 		return map;
 	}
 
-	/**
-	 * 技能要求
-	 * 
-	 * @param driver
-	 * @param dimension
-	 * @return
-	 */
-	public Map<String, String> enterToCreateSkillPage(WebDriver driver,
-					Dimension dimension) {
-		driver.manage().window().setSize(dimension);
-		String linkText = "技能要求";
-		return enterToPageByLinkText(driver, dimension, linkText);
-	}
-
-	/**
-	 * 技能要求
-	 * 
-	 * @param driver
-	 * @param dimension
-	 * @return
-	 */
-	public Map<String, String> enterToCreateDomainPage(WebDriver driver,
-					Dimension dimension) {
-		driver.manage().window().setSize(dimension);
-		String linkText = "领域要求";
-		return enterToPageByLinkText(driver, dimension, linkText);
-	}
-	
 	// TODO
 
 	public void myProfileBaseInfo(WebDriver driver) {
