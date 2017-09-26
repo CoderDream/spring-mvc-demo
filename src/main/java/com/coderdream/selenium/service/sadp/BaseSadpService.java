@@ -355,8 +355,9 @@ public class BaseSadpService {
 		driver.manage().window().setSize(dimension);
 		// 根据传入的值选择下拉选单，点击该项目
 		driver.findElement(By.linkText(linkText)).click();
+
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -367,6 +368,28 @@ public class BaseSadpService {
 		map.put(snapshot(method, driver), "进入【" + linkText + "】页面：");
 		return map;
 	}
+
+	public Map<String, String> enterToPageBySpanText(WebDriver driver,
+					Dimension dimension, String spanText) {
+		driver.manage().window().setSize(dimension);
+
+		// 点击确定按钮
+		driver.findElement(By.xpath("//span[text()='" + spanText + "']"))
+						.click();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		String method = Thread.currentThread().getStackTrace()[1]
+						.getMethodName();
+
+		Map<String, String> map = new LinkedHashMap<String, String>();
+		map.put(snapshot(method, driver), "进入【" + spanText + "】页面：");
+		return map;
+	}
+
+	// UPET-统一训战6月版本-V2R02I02
 
 	/**
 	 * 新增技能

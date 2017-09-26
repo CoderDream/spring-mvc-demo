@@ -27,6 +27,18 @@ public class CreateTaskServiceJob extends BaseJob {
 	 */
 	public void ceateTask() {
 		String linkText = "";
+		Dimension dimension =  new Dimension(540 + 16, 865 + 93);
+		String taskDescription = "UPET-统一训战6月版本-V2R02I02";
+		String acceptanceStandard = "华为验收标准";
+		String queryString = "UPET-统一训战6月版本";
+		String projectName = "UPET-统一训战6月版本-V2R02I02";
+		String queryStringContactsName = "1691";
+		String contactsName = "[B-16916]邵京国";
+		String queryStringAcceptanceName = "邵京";
+		String acceptanceName = "[B-16916]邵京国";
+		String email = "abc@qq.com";
+		String phone = "13999999999";
+		Boolean addFlag = true;
 		logger.debug("ceateTask");
 		super.setUp(baseUrl);
 		createTaskService = new CreateTaskService();
@@ -123,7 +135,10 @@ public class CreateTaskServiceJob extends BaseJob {
 		map.putAll(createTaskService.enterToPageByLinkText(driver, dimension,
 						linkText));
 		linkText = taskName;
-		map.putAll(createTaskService.enterToPageByLinkText(driver, dimension,
+		map.putAll(createTaskService.enterToPageBySpanText(driver, dimension,
+						linkText));
+
+		map.putAll(createTaskService.enterToPageBySpanText(driver, dimension,
 						linkText));
 		
 		phone = "13999999999";
