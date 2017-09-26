@@ -11,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 
 public class ProjectAuditService extends BaseSadpService {
 
