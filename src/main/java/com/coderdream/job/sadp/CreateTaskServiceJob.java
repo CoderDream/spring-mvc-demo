@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.coderdream.job.BaseJob;
 import com.coderdream.selenium.service.sadp.CreateTaskService;
+import com.coderdream.selenium.service.sadp.SearchTaskService;
 
 public class CreateTaskServiceJob extends BaseJob {
 
@@ -19,6 +20,8 @@ public class CreateTaskServiceJob extends BaseJob {
 					.getLogger(CreateTaskServiceJob.class);
 
 	private CreateTaskService createTaskService;
+	
+	private SearchTaskService searchTaskService;
 
 	private String baseUrl = "pdrcurl";
 
@@ -131,27 +134,37 @@ public class CreateTaskServiceJob extends BaseJob {
 //		map.putAll(createTaskService.deleteDomain(driver, domainName));
 
 		// 任务看板--我发布的任务
-		linkText = "任务看板--我发布的任务";
+//		linkText = "任务看板--我发布的任务";
+//		map.putAll(createTaskService.enterToPageByLinkText(driver, dimension,
+//						linkText));
+//		linkText = taskName;
+//		map.putAll(createTaskService.enterToPageBySpanText(driver, dimension,
+//						linkText));
+//
+//		map.putAll(createTaskService.enterToPageBySpanText(driver, dimension,
+//						linkText));
+//		
+//		phone = "13999999999";
+//		addFlag = false;
+//		map.putAll(createTaskService.createAndUpdateTaskByParams(driver, taskName,
+//						taskDescription, queryString, projectName,
+//						acceptanceStandard, queryStringContactsName,
+//						contactsName, queryStringAcceptanceName, acceptanceName,
+//						email, phone, addFlag));
+		
+		// 任务看板--按工作城市查询任务
+		linkText = "任务看板--按工作城市查询任务";
 		map.putAll(createTaskService.enterToPageByLinkText(driver, dimension,
 						linkText));
-		linkText = taskName;
-		map.putAll(createTaskService.enterToPageBySpanText(driver, dimension,
-						linkText));
-
-		map.putAll(createTaskService.enterToPageBySpanText(driver, dimension,
-						linkText));
 		
-		phone = "13999999999";
-		addFlag = false;
-		map.putAll(createTaskService.createAndUpdateTaskByParams(driver, taskName,
-						taskDescription, queryString, projectName,
-						acceptanceStandard, queryStringContactsName,
-						contactsName, queryStringAcceptanceName, acceptanceName,
-						email, phone, addFlag));
+		searchTaskService = new SearchTaskService();
+		String workPlace = "武汉";
+		map.putAll(searchTaskService.searchTaskByWorkPlace(driver, workPlace));
 
 		// 修改技能信息后自动返回 【任务所需资源清单】
 		// String skillName = "iOS";
 		// map.putAll(viewCreateTaskService.editSkill(driver, skillName));
+		
 
 		String aSubject = "任务看板--创建任务";
 		sendMail(map, aSubject);

@@ -1,16 +1,12 @@
-package com.coderdream.selenium.service.sadp;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+package com.coderdream.sadp;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class SearchTaskService extends BaseSadpService {
+public class CreateTaskService extends BaseSadpService {
 
-	public Map<String, String>  searchByParams(WebDriver driver, String linkText, String paramName) {
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		// String linkText = "人力看板--人力查询-按技能查询";
+	public void enterToTaskPage(WebDriver driver) {
+		String linkText = "任务看板--创建任务";
 		// 根据传入的值选择下拉选单，点击该项目
 		driver.findElement(By.linkText(linkText)).click();
 		try {
@@ -18,22 +14,51 @@ public class SearchTaskService extends BaseSadpService {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1]
+						.getMethodName();
+		snapshot(method, driver);
+	}
 
-		map.put(snapshot(method, driver), "进入【" + linkText + "】页面：");
+	public void createTaskByParams(WebDriver driver, String taskName,
+					String taskDescription, String queryString,
+					String projectName, String acceptanceStandard) {
+		String method = Thread.currentThread().getStackTrace()[1]
+						.getMethodName();
 
-		// 绝对匹配
-		driver.findElement(By.xpath("//label[text()='" + paramName + "']")).click();
+		// 任务名称
+		driver.findElement(By.id("taskName")).clear();
+		driver.findElement(By.id("taskName")).sendKeys(taskName);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		snapshot(method, driver);
 
-		map.put(snapshot(method, driver), "进入【" + linkText + "】页面：");
+		// 任务名称
+		driver.findElement(By.id("taskDescription")).clear();
+		driver.findElement(By.id("taskDescription")).sendKeys(taskDescription);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		snapshot(method, driver);
 
-		// 
-		driver.findElement(By.id("query-condition-btn")).click();
+		searchProjectName(driver, queryString, projectName);
+
+		// 验收标准
+		driver.findElement(By.id("acceptanceStandard")).clear();
+		driver.findElement(By.id("acceptanceStandard")).sendKeys(acceptanceStandard);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		snapshot(method, driver);
+
+		//
+		driver.findElement(By.id("task-update-btn")).click();
 		snapshot(method, driver);
 
 		try {
@@ -42,45 +67,51 @@ public class SearchTaskService extends BaseSadpService {
 			e.printStackTrace();
 		}
 
-		map.put(snapshot(method, driver), "进入【" + linkText + "】页面：");
-		return map;
+		snapshot(method, driver);
 	}
-	
-	public Map<String, String>  searchTaskByWorkPlace(WebDriver driver, String workPlace) {
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
 
+	public void searchProjectName(WebDriver driver, String queryString,
+					String projectName) {
+		// 清空输入框
+		driver.findElement(By.id("autocomplete_input_project")).clear();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-		// 绝对匹配
-		driver.findElement(By.xpath("//label[text()='" + workPlace + "']")).click();
+		// 输入查询条件
+		driver.findElement(By.id("autocomplete_input_project"))
+						.sendKeys(queryString);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		String method = Thread.currentThread().getStackTrace()[1]
+						.getMethodName();
+		snapshot(method, driver);
 
-		map.put(snapshot(method, driver), "选中【" + workPlace + "】：");
-
-		// 
-		driver.findElement(By.id("task-query-btn")).click();
-		map.put(snapshot(method, driver), "进入【查询结果】页面：");
-
+		// 选择查询结果
+		driver.findElement(By.xpath("//li[text()='" + projectName + "']"))
+						.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
-		return map;
+		snapshot(method, driver);
 	}
-	
-	// 
-	
+
+	//
+
 	public void selectProfileByName(WebDriver driver, String profileName) {
-		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1]
+						.getMethodName();
 
 		// 绝对匹配
-		driver.findElement(By.xpath("//span[text()='" + profileName + "']")).click();
+		driver.findElement(By.xpath("//span[text()='" + profileName + "']"))
+						.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -98,7 +129,8 @@ public class SearchTaskService extends BaseSadpService {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1]
+						.getMethodName();
 		snapshot(method, driver);
 	}
 
@@ -112,7 +144,8 @@ public class SearchTaskService extends BaseSadpService {
 		// } catch (InterruptedException e) {
 		// e.printStackTrace();
 		// }
-		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1]
+						.getMethodName();
 		snapshot(method, driver);
 
 		// 点击下拉选单
@@ -138,7 +171,8 @@ public class SearchTaskService extends BaseSadpService {
 	 * @param driver
 	 */
 	public void returnMyProfile(WebDriver driver) {
-		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1]
+						.getMethodName();
 		// 点击下拉选单
 		driver.findElement(By.id("rtn-btn")).click();
 		snapshot(method, driver);
@@ -154,9 +188,11 @@ public class SearchTaskService extends BaseSadpService {
 
 	// iOS
 	public void editSkill(WebDriver driver, String skillName) {
-		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1]
+						.getMethodName();
 		// 点击下拉选单
-		driver.findElement(By.xpath("//span[text()='" + skillName + "']")).click();
+		driver.findElement(By.xpath("//span[text()='" + skillName + "']"))
+						.click();
 		snapshot(method, driver);
 
 		try {
@@ -184,9 +220,11 @@ public class SearchTaskService extends BaseSadpService {
 	}
 
 	public void editDomain(WebDriver driver, String domainName) {
-		String method = Thread.currentThread().getStackTrace()[1].getMethodName();
+		String method = Thread.currentThread().getStackTrace()[1]
+						.getMethodName();
 		// 点击下拉选单
-		driver.findElement(By.xpath("//span[text()='" + domainName + "']")).click();
+		driver.findElement(By.xpath("//span[text()='" + domainName + "']"))
+						.click();
 		snapshot(method, driver);
 
 		try {

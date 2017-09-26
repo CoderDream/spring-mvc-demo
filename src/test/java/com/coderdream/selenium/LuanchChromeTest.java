@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 
 import com.coderdream.util.Constants;
 
-public class LuanchChrome {
+public class LuanchChromeTest {
 
 	private static Logger logger = LoggerFactory.getLogger(LuanchChrome.class);
 
