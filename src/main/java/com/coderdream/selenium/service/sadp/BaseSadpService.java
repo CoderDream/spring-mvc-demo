@@ -350,6 +350,31 @@ public class BaseSadpService {
 	 * @param linkText
 	 * @return
 	 */
+	public Map<String, String> enterToPageById(WebDriver driver,
+					Dimension dimension, String id, String linkText) {
+		driver.manage().window().setSize(dimension);
+		// 根据传入的值选择下拉选单，点击该项目
+		driver.findElement(By.id(id)).click();
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		String method = Thread.currentThread().getStackTrace()[1]
+						.getMethodName();
+
+		Map<String, String> map = new LinkedHashMap<String, String>();
+		map.put(snapshot(method, driver), "进入【" + linkText + "】页面：");
+		return map;
+	}
+
+	/**
+	 * @param driver
+	 * @param dimension
+	 * @param linkText
+	 * @return
+	 */
 	public Map<String, String> enterToPageByLinkText(WebDriver driver,
 					Dimension dimension, String linkText) {
 		driver.manage().window().setSize(dimension);

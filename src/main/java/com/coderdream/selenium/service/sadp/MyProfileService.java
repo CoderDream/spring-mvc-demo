@@ -14,21 +14,21 @@ import org.openqa.selenium.support.ui.Select;
 
 public class MyProfileService extends BaseSadpService {
 
-	public Map<String, String> myProfile(WebDriver driver) {
-		String linkText = "人力看板--我的人力档案";
-		// 根据传入的值选择下拉选单，点击该项目
-		driver.findElement(By.linkText(linkText)).click();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
-		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put(snapshot(method, driver), "进入【我的人力档案】页面：");
-		return map;
-	}
+//	public Map<String, String> myProfile(WebDriver driver) {
+//		String linkText = "我的人力档案";
+//		// 根据传入的值选择下拉选单，点击该项目
+//		driver.findElement(By.linkText(linkText)).click();
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+//		String method = Thread.currentThread().getStackTrace()[1]
+//						.getMethodName();
+//		Map<String, String> map = new LinkedHashMap<String, String>();
+//		map.put(snapshot(method, driver), "进入【我的人力档案】页面：");
+//		return map;
+//	}
 
 	public Map<String, String> myProfileBaseInfo(WebDriver driver) {
 		String linkText = "基本信息";

@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.openqa.selenium.Dimension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +34,10 @@ public class MyProfileServiceJob extends BaseJob {
 		viewMyProfileService.login(driver, roleName, staffName);
 
 		// 进入【我的人力看板】页面
-		map.putAll(viewMyProfileService.myProfile(driver));
+		String linkText = "我的人力档案";
+		Dimension dimension =  new Dimension(540 + 16, 865 + 93);
+		map.putAll(viewMyProfileService.enterToPageByLinkText(driver, dimension,
+						linkText));
 
 		// 进入【我的基本信息】页面
 		map.putAll(viewMyProfileService.myProfileBaseInfo(driver));
@@ -45,7 +49,7 @@ public class MyProfileServiceJob extends BaseJob {
 		// String skillName = "iOS";
 		// map.putAll(viewMyProfileService.editSkill(driver, skillName));
 
-		String aSubject = "自动化测试--查看我的人力档案";
+		String aSubject = "我的人力档案";
 		sendMail(map, aSubject);
 
 		super.tearDown();
@@ -63,7 +67,10 @@ public class MyProfileServiceJob extends BaseJob {
 		viewMyProfileService.login(driver, roleName, staffName);
 
 		// 进入【我的人力看板】页面
-		map.putAll(viewMyProfileService.myProfile(driver));
+		String id = "my_profile";
+		String linkText = "我的人力档案";
+		Dimension dimension =  new Dimension(540 + 16, 865 + 93);
+		map.putAll(viewMyProfileService.enterToPageById(driver, dimension, id, linkText));
 
 		// 修改技能信息后自动返回
 		String skillName = "iOS";

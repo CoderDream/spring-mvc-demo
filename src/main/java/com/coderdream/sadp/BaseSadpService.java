@@ -28,8 +28,8 @@ public class BaseSadpService {
 	 * @param staffName
 	 */
 	public void login(WebDriver driver, String roleName, String staffName) {
-		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+//		String method = Thread.currentThread().getStackTrace()[1]
+//						.getMethodName();
 
 		// 点击下拉选单
 		driver.findElement(By.id("roleName")).click();
@@ -407,43 +407,4 @@ public class BaseSadpService {
 		return fileName;
 	}
 
-}
-
-class SnapThread extends Thread {
-
-	private static Logger logger = LoggerFactory.getLogger(SnapThread.class);
-
-	private String picname;
-	private WebDriver driver;
-
-	public SnapThread(String threadName, String picname, WebDriver driver) {
-		super(threadName);
-		this.picname = picname;
-		this.driver = driver;
-	}
-
-	public void run() {
-		System.out.println(getName() + " 线程运行开始!");
-		SimpleDateFormat sf = new SimpleDateFormat(
-						Constants.COMPLEX_DATE_FORMAT2);
-		picname = sf.format(new Date()) + "_" + picname + ".png";
-		logger.debug("picname\t {}", picname);
-
-		// 这里等待页面加载完成
-		try {
-			// Thread.sleep(1000);
-
-			// 下面代码是得到截图并保存在D盘下
-			File screenShotFile = ((TakesScreenshot) driver)
-							.getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(screenShotFile,
-							new File(System.getProperty("user.dir")
-											+ "\\snapshot\\" + picname));
-
-			// Thread.sleep(1000);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(getName() + " 线程运行结束!");
-	}
 }

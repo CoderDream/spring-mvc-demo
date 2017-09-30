@@ -55,7 +55,7 @@ public class CreateTaskService extends BaseSadpService {
 						contactsName));
 
 		// 设置验收人
-		map.putAll(searchaAcceptance(driver, queryStringAcceptanceName,
+		map.putAll(searchAcceptance(driver, queryStringAcceptanceName,
 						acceptanceName));
 
 		try {
@@ -187,7 +187,7 @@ public class CreateTaskService extends BaseSadpService {
 		return map;
 	}
 
-	private Map<String, String> searchaAcceptance(WebDriver driver,
+	private Map<String, String> searchAcceptance(WebDriver driver,
 					String queryString, String acceptanceName) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		// 清空输入框
