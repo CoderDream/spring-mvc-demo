@@ -222,7 +222,7 @@ public class CreateTaskServiceJob extends BaseJob {
 
 		// 任务看板--按工作城市查询任务
 		String id = "search_task_by_workplace";
-		linkText = "按工作城市查询任务";
+		linkText = "任务看板";
 		map.putAll(createTaskService.enterToPageById(driver, dimension, id,
 						linkText));
 

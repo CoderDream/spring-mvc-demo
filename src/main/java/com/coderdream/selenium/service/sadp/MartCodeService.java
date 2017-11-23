@@ -20,42 +20,23 @@ import org.slf4j.LoggerFactory;
 
 import com.coderdream.util.Constants;
 
-public class BaseSadpService {
+public class MartCodeService {
 
 	private static Logger logger = LoggerFactory
-					.getLogger(BaseSadpService.class);
+			.getLogger(MartCodeService.class);
 
 	/**
 	 * @param driver
 	 * @param roleName
 	 * @param staffName
 	 */
-	public void login(WebDriver driver, String roleName, String staffName) {
-		// 点击下拉选单
-		driver.findElement(By.id("roleName")).click();
+	public void index(WebDriver driver) {
 
 		// 根据传入的值选择下拉选单，点击该项目
-		driver.findElement(By.xpath("//option[text()='" + roleName + "']"))
-						.click();
-
-		// snapshot(method, driver);
-		// 设置值
-		Select selectRoleName = new Select(
-						driver.findElement(By.id("roleName")));
-		// snapshot(method, driver);
-		selectRoleName.selectByVisibleText(roleName);
-
-		// 点击下拉选单
-		driver.findElement(By.id("staff")).click();
-
-		// 根据传入的值选择下拉选单，点击该项目
-		driver.findElement(By.xpath("//option[text()='" + staffName + "']"))
-						.click();
-		// 设置值
-		Select selectUser = new Select(driver.findElement(By.id("staff")));
-		selectUser.selectByVisibleText(staffName);
-
-		driver.findElement(By.id("submit")).click();
+//		String xpath = "//div[@id='mart-rewards']";
+		String xpath = "//*[@id=\"item-11030\"]/div/div[2]";
+		WebElement webElement = driver.findElement(By.xpath(xpath));
+		System.out.println("webElement.getText()" + webElement.getText());
 	}
 
 	public Map<String, String> enterToAddAuditPage(WebDriver driver) {
@@ -67,7 +48,7 @@ public class BaseSadpService {
 			e.printStackTrace();
 		}
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		String fileName = snapshot(method, driver);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("登陆【新建审计】页面", fileName);
@@ -76,10 +57,10 @@ public class BaseSadpService {
 
 	public void enterToAuditPage(WebDriver driver, String projectName) {
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		// 绝对匹配
 		driver.findElement(By.xpath("//span[text()='" + projectName + "']"))
-						.click();
+				.click();
 
 		try {
 			Thread.sleep(2000);
@@ -96,7 +77,7 @@ public class BaseSadpService {
 	 * @param projectName
 	 */
 	public void setProjectInfoAndEnterToAuditPage(WebDriver driver,
-					String queryString, String projectName) {
+			String queryString, String projectName) {
 		// 清空输入框
 		driver.findElement(By.id("autocomplete_input_project")).clear();
 		try {
@@ -107,19 +88,19 @@ public class BaseSadpService {
 
 		// 输入查询条件
 		driver.findElement(By.id("autocomplete_input_project"))
-						.sendKeys(queryString);
+				.sendKeys(queryString);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		snapshot(method, driver);
 
 		// 选择查询结果
 		driver.findElement(By.xpath("//li[text()='" + projectName + "']"))
-						.click();
+				.click();
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -153,14 +134,14 @@ public class BaseSadpService {
 		}
 
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		snapshot(method, driver);
 	}
 
 	public void addAuditItem(WebDriver driver, String auditItemName,
-					String auditContent, Boolean passFlag) {
+			String auditContent, Boolean passFlag) {
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		// 点击下拉选单
 		driver.findElement(By.id("auditItem")).click();
 		snapshot(method, driver);
@@ -174,7 +155,7 @@ public class BaseSadpService {
 
 		// 根据传入的值选择下拉选单，点击该项目
 		driver.findElement(By.xpath("//option[text()='" + auditItemName + "']"))
-						.click();
+				.click();
 		snapshot(method, driver);
 
 		try {
@@ -184,7 +165,7 @@ public class BaseSadpService {
 		}
 		// 设置值
 		Select selectRoleName = new Select(
-						driver.findElement(By.id("auditItem")));
+				driver.findElement(By.id("auditItem")));
 		selectRoleName.selectByVisibleText(auditItemName);
 
 		try {
@@ -245,7 +226,7 @@ public class BaseSadpService {
 	 * @param auditItemName
 	 */
 	public void enterToEditAuditItemPage(WebDriver driver,
-					String auditItemName) {
+			String auditItemName) {
 		// 链接文字
 		driver.findElement(By.linkText(auditItemName)).click();
 		try {
@@ -255,12 +236,12 @@ public class BaseSadpService {
 		}
 
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		snapshot(method, driver);
 	}
 
 	public void editAuditItem(WebDriver driver, String auditContent,
-					Boolean passFlag) {
+			Boolean passFlag) {
 		// 设置评价内容
 		driver.findElement(By.id("auditContent")).clear();
 		driver.findElement(By.id("auditContent")).sendKeys(auditContent);
@@ -271,7 +252,7 @@ public class BaseSadpService {
 		}
 
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		snapshot(method, driver);
 
 		// pass or fail 通过Label点击
@@ -322,7 +303,7 @@ public class BaseSadpService {
 		}
 
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		snapshot(method, driver);
 
 		try {
@@ -351,8 +332,8 @@ public class BaseSadpService {
 	 * @return
 	 */
 	public Map<String, String> enterToPageById(WebDriver driver,
-					Dimension dimension, String id, String linkText) {
-		// driver.manage().window().setSize(dimension);
+			Dimension dimension, String id, String linkText) {
+		driver.manage().window().setSize(dimension);
 		// 根据传入的值选择下拉选单，点击该项目
 		driver.findElement(By.id(id)).click();
 
@@ -362,7 +343,7 @@ public class BaseSadpService {
 			e.printStackTrace();
 		}
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		map.put(snapshot(method, driver), "进入【" + linkText + "】页面：");
@@ -376,8 +357,8 @@ public class BaseSadpService {
 	 * @return
 	 */
 	public Map<String, String> enterToPageByLinkText(WebDriver driver,
-					Dimension dimension, String linkText) {
-		// driver.manage().window().setSize(dimension);
+			Dimension dimension, String linkText) {
+		driver.manage().window().setSize(dimension);
 		// 根据传入的值选择下拉选单，点击该项目
 		driver.findElement(By.linkText(linkText)).click();
 
@@ -387,7 +368,7 @@ public class BaseSadpService {
 			e.printStackTrace();
 		}
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		map.put(snapshot(method, driver), "进入【" + linkText + "】页面：");
@@ -395,19 +376,19 @@ public class BaseSadpService {
 	}
 
 	public Map<String, String> enterToPageBySpanText(WebDriver driver,
-					Dimension dimension, String spanText) {
-		// driver.manage().window().setSize(dimension);
+			Dimension dimension, String spanText) {
+		driver.manage().window().setSize(dimension);
 
 		// 点击确定按钮
 		driver.findElement(By.xpath("//span[text()='" + spanText + "']"))
-						.click();
+				.click();
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		map.put(snapshot(method, driver), "进入【" + spanText + "】页面：");
@@ -424,12 +405,12 @@ public class BaseSadpService {
 	 * @return
 	 */
 	public Map<String, String> addSkill(WebDriver driver, String skillName,
-					String proficiencyName) {
+			String proficiencyName) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		driver.findElement(By.id("autocomplete_input_skill"))
-						.sendKeys(skillName);
+				.sendKeys(skillName);
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -438,7 +419,7 @@ public class BaseSadpService {
 		map.put(snapshot(method, driver), "输入技能" + skillName + ":");
 
 		driver.findElement(By.xpath("//span[text()='" + skillName + "']"))
-						.click();
+				.click();
 
 		try {
 			Thread.sleep(1000);
@@ -448,7 +429,7 @@ public class BaseSadpService {
 		map.put(snapshot(method, driver), "选择技能" + skillName + ":");
 
 		Select selectRoleName = new Select(
-						driver.findElement(By.id("proficiencyItem")));
+				driver.findElement(By.id("proficiencyItem")));
 		// selectRoleName.selectByValue(proficiencyName); //未审核
 		selectRoleName.selectByVisibleText(proficiencyName);
 
@@ -489,13 +470,13 @@ public class BaseSadpService {
 	 * @return
 	 */
 	public Map<String, String> editSkill(WebDriver driver, String skillName,
-					String proficiencyName) {
+			String proficiencyName) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		// 点击下拉选单
 		driver.findElement(By.xpath("//span[text()='" + skillName + "']"))
-						.click();
+				.click();
 		map.put(snapshot(method, driver), "点击技能");
 
 		try {
@@ -520,8 +501,7 @@ public class BaseSadpService {
 
 		// 根据传入的值选择下拉选单，点击该项目
 		driver.findElement(
-						By.xpath("//option[text()='" + proficiencyName + "']"))
-						.click();
+				By.xpath("//option[text()='" + proficiencyName + "']")).click();
 
 		try {
 			Thread.sleep(1000);
@@ -557,10 +537,10 @@ public class BaseSadpService {
 	public Map<String, String> deleteSkill(WebDriver driver, String skillName) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		// 点击下拉选单
 		driver.findElement(By.xpath("//span[text()='" + skillName + "']"))
-						.click();
+				.click();
 		map.put(snapshot(method, driver), "点击技能");
 
 		try {
@@ -595,12 +575,12 @@ public class BaseSadpService {
 	 * @return
 	 */
 	public Map<String, String> addDomain(WebDriver driver, String domainName,
-					String experienceName) {
+			String experienceName) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		driver.findElement(By.id("autocomplete_input_domain"))
-						.sendKeys(domainName);
+				.sendKeys(domainName);
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -609,7 +589,7 @@ public class BaseSadpService {
 		map.put(snapshot(method, driver), "输入领域" + domainName + ":");
 
 		driver.findElement(By.xpath("//span[text()='" + domainName + "']"))
-						.click();
+				.click();
 
 		try {
 			Thread.sleep(1000);
@@ -619,7 +599,7 @@ public class BaseSadpService {
 		map.put(snapshot(method, driver), "选择领域" + domainName + ":");
 
 		Select selectRoleName = new Select(
-						driver.findElement(By.id("experienceItem")));
+				driver.findElement(By.id("experienceItem")));
 		// selectRoleName.selectByValue(experienceName); //未审核
 		selectRoleName.selectByVisibleText(experienceName);
 
@@ -660,13 +640,13 @@ public class BaseSadpService {
 	 * @return
 	 */
 	public Map<String, String> editDomain(WebDriver driver, String domainName,
-					String experienceName) {
+			String experienceName) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		// 点击下拉选单
 		driver.findElement(By.xpath("//span[text()='" + domainName + "']"))
-						.click();
+				.click();
 		map.put(snapshot(method, driver), "点击领域");
 
 		try {
@@ -691,8 +671,7 @@ public class BaseSadpService {
 
 		// 根据传入的值选择下拉选单，点击该项目
 		driver.findElement(
-						By.xpath("//option[text()='" + experienceName + "']"))
-						.click();
+				By.xpath("//option[text()='" + experienceName + "']")).click();
 
 		try {
 			Thread.sleep(1000);
@@ -726,13 +705,13 @@ public class BaseSadpService {
 	 * @return
 	 */
 	public Map<String, String> deleteDomain(WebDriver driver,
-					String domainName) {
+			String domainName) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
 		String method = Thread.currentThread().getStackTrace()[1]
-						.getMethodName();
+				.getMethodName();
 		// 点击下拉选单
 		driver.findElement(By.xpath("//span[text()='" + domainName + "']"))
-						.click();
+				.click();
 		map.put(snapshot(method, driver), "点击领域");
 
 		try {
@@ -761,18 +740,18 @@ public class BaseSadpService {
 
 	public String snapshot(String picname, WebDriver driver) {
 		SimpleDateFormat sf = new SimpleDateFormat(
-						Constants.COMPLEX_DATE_FORMAT2);
+				Constants.COMPLEX_DATE_FORMAT2);
 		picname = sf.format(new Date()) + "_" + picname + ".png";
 		logger.debug("picname\t {}", picname);
 
 		String fileName = System.getProperty("user.dir") + "\\snapshot\\"
-						+ picname;
+				+ picname;
 
 		// 这里等待页面加载完成
 		try {
 			// 下面代码是得到截图并保存在D盘下
 			File screenShotFile = ((TakesScreenshot) driver)
-							.getScreenshotAs(OutputType.FILE);
+					.getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(screenShotFile, new File(fileName));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -782,21 +761,21 @@ public class BaseSadpService {
 	}
 
 	public String snapshot(String picname, WebDriver driver,
-					Dimension dimension) {
-		// driver.manage().window().setSize(dimension);
+			Dimension dimension) {
+		driver.manage().window().setSize(dimension);
 		SimpleDateFormat sf = new SimpleDateFormat(
-						Constants.COMPLEX_DATE_FORMAT2);
+				Constants.COMPLEX_DATE_FORMAT2);
 		picname = sf.format(new Date()) + "_" + picname + ".png";
 		logger.debug("picname\t {}", picname);
 
 		String fileName = System.getProperty("user.dir") + "\\snapshot\\"
-						+ picname;
+				+ picname;
 
 		// 这里等待页面加载完成
 		try {
 			// 下面代码是得到截图并保存在D盘下
 			File screenShotFile = ((TakesScreenshot) driver)
-							.getScreenshotAs(OutputType.FILE);
+					.getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(screenShotFile, new File(fileName));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -807,12 +786,12 @@ public class BaseSadpService {
 
 	public String snapshot2(String picname, WebElement element) {
 		SimpleDateFormat sf = new SimpleDateFormat(
-						Constants.COMPLEX_DATE_FORMAT2);
+				Constants.COMPLEX_DATE_FORMAT2);
 		picname = sf.format(new Date()) + "_" + picname + ".png";
 		logger.debug("picname\t {}", picname);
 
 		String fileName = System.getProperty("user.dir") + "\\snapshot\\"
-						+ picname;
+				+ picname;
 
 		// 这里等待页面加载完成
 		try {

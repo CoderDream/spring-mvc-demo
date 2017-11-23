@@ -20,7 +20,8 @@ public class LuanchChrome {
 		driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
 
 		// get()打开一个站点
-		driver.get("https://www.baidu.com");
+		driver.get("https://mart.coding.net/projects");
+		//driver.get("https://www.baidu.com");
 		// getTitle()获取当前页面title的值
 		System.out.println("当前打开页面的标题是： " + driver.getTitle());
 

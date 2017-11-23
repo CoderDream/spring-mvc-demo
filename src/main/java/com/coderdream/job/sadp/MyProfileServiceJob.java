@@ -91,7 +91,9 @@ public class MyProfileServiceJob extends BaseJob {
 	}
 
 	public static void main(String[] args) {
-		// new MyProfileServiceJob().getMyProfile();
+		//new MyProfileServiceJob().getMyProfile();
+
+		//jvmPid();
 		new MyProfileServiceJob().operateProfileSkillInfo();
 
 		// logger.debug(System.getProperty("user.dir"));
